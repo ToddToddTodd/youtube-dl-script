@@ -8,9 +8,9 @@
 # echo ""
 # read -p 'Two Factor authentication: ' twofactor
 # echo ""
-read -p 'Your YouTube Favorites Link: ' link
+read -p 'Your Public YouTube Favorites Link: ' link
 # echo ""
-# read -p 'Where do you want to save your videos?' savelocation
+read -e -p "Where do you want to save your videos?" SOURCE_DIR
 
 youtube-dl \
 --verbose \
@@ -20,9 +20,9 @@ youtube-dl \
 --continue \
 --no-call-home \
 --write-description \
---output '~/Desktop/youtube-dl/%(playlist)s/%(playlist_index)s - %(title)s - %(uploader)s. - %(upload_date)s.%(ext)s' \
---download-archive '~/Desktop/youtube-dl/favorites-archive.txt' \
-$link 2>> ~/Desktop/youtube-dl/favorites-errors.txt
+--output $SOURCE_DIR'/%(playlist)s/%(playlist_index)s - %(title)s - %(uploader)s. - %(upload_date)s.%(ext)s' \
+--download-archive $SOURCE_DIR'/favorites-archive.txt' \
+$link 2>> $SOURCE_DIR'/favorites-errors.txt'
 
 # --username $username \
 # --password $password \
